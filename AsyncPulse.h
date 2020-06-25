@@ -15,7 +15,7 @@ public:
   int get();
 
 private:
-  int _state, _lastState, _timeOn, _timeOff, _countOn, _countOff;
+  int _state, _timeOn, _timeOff, _countOn, _countOff;
 };
 
 #endif

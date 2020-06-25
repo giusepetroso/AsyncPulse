@@ -9,7 +9,6 @@
 AsyncPulse::AsyncPulse(int timeOn, int timeOff)
 {
   _state = 1;
-  _lastState = 0;
   _timeOn = timeOn;
   _timeOff = timeOff;
   _countOn = 0;
