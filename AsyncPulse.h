@@ -11,11 +11,12 @@
 class AsyncPulse
 {
 public:
-  AsyncPulse(int timeOn, int timeOff);
+  AsyncPulse(unsigned long timeOn, unsigned long timeOff);
   int get();
 
 private:
-  int _state, _timeOn, _timeOff, _countOn, _countOff;
+  int _state;
+  unsigned long _timeOn, _timeOff, _countOn, _countOff;
 };
 
 #endif

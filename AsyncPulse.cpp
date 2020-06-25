@@ -6,7 +6,7 @@
 #include "Arduino.h"
 #include "AsyncPulse.h"
 
-AsyncPulse::AsyncPulse(int timeOn, int timeOff)
+AsyncPulse::AsyncPulse(unsigned long timeOn, unsigned long timeOff)
 {
   _state = 1;
   _timeOn = timeOn;
@@ -17,37 +17,37 @@ AsyncPulse::AsyncPulse(int timeOn, int timeOff)
 
 int AsyncPulse::get()
 {
+  unsigned long millisecs = millis();
+
   if (_state == 1)
   {
-    if (millis() - _countOn >= _timeOn)
+    if (millisecs - _countOn >= _timeOn)
     {
       _state = 0;
-      _countOff = millis();
+      _countOff = millisecs;
     }
   }
 
   if (_state == 0)
   {
-    if (millis() - _countOff >= _timeOff)
+    if (millisecs - _countOff >= _timeOff)
     {
       _state = 1;
-      _countOn = millis();
+      _countOn = millisecs;
     }
   }
 
-  // Serial.print("STATE: ");
-  // Serial.print(_state);
-  // Serial.print(" | LAST STATE: ");
-  // Serial.print(_lastState);
-  // Serial.print(" | TON: ");
-  // Serial.print(millis() - _countOn);
-  // Serial.print(" / ");
-  // Serial.print(_timeOn);
-  // Serial.print(" | FOFF: ");
-  // Serial.print(millis() - _countOff);
-  // Serial.print(" / ");
-  // Serial.print(_timeOff);
-  // Serial.println("");
+  Serial.print("STATE: ");
+  Serial.print(_state);
+  Serial.print(" | TON: ");
+  Serial.print(millisecs - _countOn);
+  Serial.print(" / ");
+  Serial.print(_timeOn);
+  Serial.print(" | TOFF: ");
+  Serial.print(millisecs - _countOff);
+  Serial.print(" / ");
+  Serial.print(_timeOff);
+  Serial.println("");
 
   // return the state
   return _state;
